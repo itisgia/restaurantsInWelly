@@ -33,6 +33,10 @@ h3 {
   padding: 13.5px;
   font-family: 'Courgette', cursive;
 }
+h3:hover {
+  background-color: #af7f77;
+  color: white;
+}
 #container {
   width: 100vw;
   top:0;
