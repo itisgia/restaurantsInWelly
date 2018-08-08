@@ -12,41 +12,49 @@
       "lng" : 174.784104
     },
     {
+      "id" : 3,
       "title" : "Logan Brown",
       "lat" : -41.294832,
       "lng" : 174.774728
     },
     {
+      "id" : 4,
       "title" : "Nakhon Thai",
       "lat" : -41.304330,
       "lng" : 174.794741
     },
     {
+      "id" : 5,
       "title" : "Mediterranean Foods Trattoria & Deli",
       "lat" : -41.313403,
       "lng" : 174.782313
     },
     {
+      "id" : 6,
       "title" : "Fidel's",
       "lat" : -41.295907,
       "lng" : 174.773949
     },
     {
+      "id" : 7,
       "title" : "Dillingers Brasserie & Bar",
       "lat" : -41.282234,
       "lng" : 174.776505
     },
     {
+      "id" : 8,
       "title" : "The Botanist",
       "lat" : -41.328922,
       "lng" : 174.795506
     },
     {
+      "id" : 9,
       "title" : "Sweet Mother's Kitchen",
       "lat" : -41.294266,
       "lng" : 174.783235
     },
     {
+      "id" : 10,
       "title" : "The Backbencher Gastropub",
       "lat" : -41.277602,
       "lng" :  174.777964

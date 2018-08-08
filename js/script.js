@@ -25,15 +25,16 @@ function getLocation() {
       dataType: 'json',
       success: function(marker){
           for (var i = 0; i < marker.length; i++) {
-            console.log(marker);
-              $('#listOfPlace').append("<div class='place' data-id='"+marker[i].id+"' onclick= 'goToPlace()'><h3>"+marker[i].title+"</h3></div><hr>")
+            // console.log(marker);
+              $('#listOfPlace').append("<div class='place' data-id='"+marker[i].id+"'><h3>"+marker[i].title+"</h3></div><hr>")
                getMarkers = new google.maps.Marker({
                   position: {
                       lat: marker[i].lat,
                       lng: marker[i].lng
                   },
                   map: map,
-                  title: marker[i].title
+                  title: marker[i].title,
+                  markerID: marker[i].id
                 });
               storeArray.push(marker);
               // goToPlace();
@@ -50,12 +51,14 @@ function getLocation() {
 console.log(storeArray);
 
 
-function goToPlace(e) {
-  console.log('clicked');
+$(document).on('click', '.place', function(){
+  var id = $(this).data('id');
   for (var i = 0; i < storeArray.length; i++) {
-      if (storeArray[i].id === e.t ) {
+    console.log(storeArray[i].id);
+      if (storeArray[i].id === id) {
         // map.panTo(storeArray[i].position);
+        // map.setZoom(17);
+        console.log(id);
       }
   }
-
-}
+});
