@@ -36,7 +36,7 @@ function getLocation() {
                   title: marker[i].title,
                   markerID: marker[i].id
                 });
-              storeArray.push(marker);
+              storeArray.push(getMarkers);
               // goToPlace();
           }
       },
@@ -49,16 +49,15 @@ function getLocation() {
 }
 
 console.log(storeArray);
-
-
 $(document).on('click', '.place', function(){
   var id = $(this).data('id');
   for (var i = 0; i < storeArray.length; i++) {
-    console.log(storeArray[i].id);
-      if (storeArray[i].id === id) {
-        // map.panTo(storeArray[i].position);
-        // map.setZoom(17);
+      if (storeArray[i].markerID === id) {
+        console.log(storeArray[i]);
+        map.panTo(storeArray[i].position);
+        map.setZoom(17);
         console.log(id);
+        break;
       }
   }
 });
