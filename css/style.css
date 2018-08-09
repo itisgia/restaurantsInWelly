@@ -28,7 +28,7 @@ h1 {
 
 h3 {
   display: block;
-  font-size: 40px;
+  font-size: 16px;
   text-align: center;
   padding: 13.5px;
   font-family: 'Courgette', cursive;
@@ -48,16 +48,42 @@ h3:hover {
 
 #content {
   width: 90vw;
-  height: 80vh;
   display: flex;
 }
 #map {
-  width: 50vw;
-  height: 800px;
+  width: 80vw;
+  height: 500px;
 }
 
 #listOfPlace {
   border: 5px solid #af7f77;
-  width: 50vw;
-  height: 800px;
+  width: 20vw;
+  height: 500px;
+}
+
+#directionsPanel {
+  width: 80%;
+  height: 300px;
+}
+
+#btn {
+  text-align: center;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  display: none;
+}
+
+#btn button {
+  margin-right: 6%;
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: 24px;
+  letter-spacing: 4px;
+  border: none;
+  background-color: #af7f77;
+  color: white;
+  padding: 0 20px;
+  border-radius: 40px;
+}
+#directionsPanel {
+  display: none;
 }
