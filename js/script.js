@@ -5,6 +5,7 @@ var getMarkers;
 var directionsDisplay = new google.maps.DirectionsRenderer();
 var directionService = new google.maps.DirectionsService();
 var railwayStation = new google.maps.LatLng(-41.2865,174.7762);
+var infoBox;
 
 google.maps.event.addDomListener(window, 'load', initMap);
 
@@ -42,6 +43,7 @@ function getLocation() {
                   title: marker[i].title,
                   markerID: marker[i].id
                 });
+                 markerClickEvent(getMarkers);
               storeArray.push(getMarkers); // storing in an array so that use as a referance
               // goToPlace();
           }
@@ -69,6 +71,7 @@ $(document).on('click', '.place', function(){
           destination: storeArray[i].position,
           travelMode : "DRIVING"
         }
+        findPlaceInfo(storeArray[i].title)
       }
   }
   directionService.route(request, function(result, status) {
@@ -79,16 +82,57 @@ $(document).on('click', '.place', function(){
   showDiv ();
 });
 
+function markerClickEvent(marker) {
+    if(infoBox){
+        infoBox.close(); // if infobox is open close
+    }
+  //initialzing info window
+    infoBox = new google.maps.InfoWindow();
+    google.maps.event.addListener(marker, 'click', function () {
+        infoBox.setContent('<div><strong>'+marker.title+'</strong></div>');
+        infoBox.open(map, marker); //wnat to appear on the map and by marker
+    })
+}
 function showDiv () {
-  $('#btn')["0"].style.display = 'block';
-  $('#directionsPanel')["0"].style.display = 'block';
-  walking();
+    $('#btn')["0"].style.display = 'block';
+    $('#directionsPanel')["0"].style.display = 'block';
+    walking();
 }
 
 document.getElementById("walk").addEventListener("click", walking);
 function walking() {
-  console.log('clicked');
+    console.log('clicked');
 }
 
+
+var service;
+function findPlaceInfo(placeNames) {
+    console.log(placeNames);
+    var request = {
+        query: placeNames + " Wellington New Zealand",
+        field: ['id', 'name','photos','formatted_address', 'rating', 'opening_hours' ]
+    };
+    service = new google.maps.places.PlacesService(map);
+    service.findPlaceFromQuery(request, getPlace);
+}
+
+
+function getPlace(results, status) {
+    console.log(status);
+    console.log(results);
+    if (status == "OK") {
+        console.log(results);
+        for (var i = 0; i < results.length; i++) {
+          console.log(results[i]);
+          var photos = results[i].photo
+          console.log(photo[0].getUrl({
+              'maxWidth': 300,
+              'maxHeight': 300
+          })); // get the url of photos
+        }
+    } else {
+        console.log("WRONG");
+    }
+}
 // function
 // get direction from yoobe school
