@@ -5,7 +5,7 @@ var getMarkers;
 var directionsDisplay = new google.maps.DirectionsRenderer();
 var directionService = new google.maps.DirectionsService();
 var railwayStation = new google.maps.LatLng(-41.2865,174.7762);
-var infoBox;
+var infobox;
 
 google.maps.event.addDomListener(window, 'load', initMap);
 
@@ -83,16 +83,27 @@ $(document).on('click', '.place', function(){
 });
 
 function markerClickEvent(marker) {
-    if(infoBox){
-        infoBox.close(); // if infobox is open close
-    }
+    // if(infoBox){
+    //     infoBox.close(); // if infobox is open close
+    // }
   //initialzing info window
-    infoBox = new google.maps.InfoWindow();
+    infobox = new google.maps.InfoWindow();
     google.maps.event.addListener(marker, 'click', function () {
-        infoBox.setContent('<div><strong>'+marker.title+'</strong></div>');
-        infoBox.open(map, marker); //wnat to appear on the map and by marker
+        infobox.setContent('<div><strong>'+marker.title+'</strong></div>');
+        infobox.open(map, getMarkers); //wnat to appear on the map and by marker
+        // showInfoBox(marker);
     })
 }
+
+// function showInfoBox(marker) {
+//     if(infobox){
+//       infobox.close();
+//   }
+//   infobox = new google.maps.InfoWindow();
+//   infobox.setContent('<div><strong>'+marker.title+'</strong></div>');
+//   infobox.open(map, marker);
+// }
+
 function showDiv () {
     $('#btn')["0"].style.display = 'block';
     $('#directionsPanel')["0"].style.display = 'block';
@@ -106,20 +117,20 @@ function showDiv () {
 
 
 var service;
-function findPlaceInfo(placeName){
+function findPlaceInfo(placeName) {
     console.log(placeName);
     var request = {
-        query: placeName +' Wellington New Zealand',
-        fields: ['id', 'name', 'photos', 'formatted_address', 'rating', 'opening_hours']
+        query: placeName + " Wellington New Zealand",
+        fields: ['id', 'name','photos','formatted_address', 'rating', 'opening_hours' ]
     };
     service = new google.maps.places.PlacesService(map);
-    service.findPlaceFromQuery(request, getPlaces);
+    service.findPlaceFromQuery(request, getPlace);
 }
 
 
-function getPlaces(results, status) {
-    console.log(status);
-    console.log(results);
+function getPlace(results, status) {
+    // console.log(status);
+    // console.log(results);
     if (status == "OK") {
         console.log(results);
         for (var i = 0; i < results.length; i++) {
