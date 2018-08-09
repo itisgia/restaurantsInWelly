@@ -72,6 +72,7 @@ $(document).on('click', '.place', function(){
           travelMode : "DRIVING"
         }
         findPlaceInfo(storeArray[i].title);
+        showInfoBox(storeArray[i]);
       }
   }
   directionService.route(request, function(result, status) {
@@ -82,27 +83,27 @@ $(document).on('click', '.place', function(){
   showDiv ();
 });
 
-function markerClickEvent(marker) {
+function markerClickEvent(getMarkers) {
     // if(infoBox){
     //     infoBox.close(); // if infobox is open close
     // }
   //initialzing info window
     infobox = new google.maps.InfoWindow();
-    google.maps.event.addListener(marker, 'click', function () {
-        infobox.setContent('<div><strong>'+marker.title+'</strong></div>');
-        infobox.open(map, getMarkers); //wnat to appear on the map and by marker
-        // showInfoBox(marker);
+    google.maps.event.addListener(getMarkers, 'click', function () {
+        // infobox.setContent('<div><strong>'+marker.title+'</strong></div>');
+        // infobox.open(map, getMarkers); //wnat to appear on the map and by marker
+        showInfoBox(getMarkers);
     })
 }
 
-// function showInfoBox(marker) {
-//     if(infobox){
-//       infobox.close();
-//   }
-//   infobox = new google.maps.InfoWindow();
-//   infobox.setContent('<div><strong>'+marker.title+'</strong></div>');
-//   infobox.open(map, marker);
-// }
+function showInfoBox(marker) {
+    if(infobox){
+      infobox.close();
+  }
+  infobox = new google.maps.InfoWindow();
+  infobox.setContent('<div><strong>'+marker.title+'</strong></div>');
+  infobox.open(map, getMarkers);
+}
 
 function showDiv () {
     $('#btn')["0"].style.display = 'block';
