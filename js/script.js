@@ -71,7 +71,7 @@ $(document).on('click', '.place', function(){
           destination: storeArray[i].position,
           travelMode : "DRIVING"
         }
-        findPlaceInfo(storeArray[i].title)
+        findPlaceInfo(storeArray[i].title);
       }
   }
   directionService.route(request, function(result, status) {
@@ -96,36 +96,36 @@ function markerClickEvent(marker) {
 function showDiv () {
     $('#btn')["0"].style.display = 'block';
     $('#directionsPanel')["0"].style.display = 'block';
-    walking();
+    // walking();
 }
 
-document.getElementById("walk").addEventListener("click", walking);
-function walking() {
-    console.log('clicked');
-}
+// document.getElementById("walk").addEventListener("click", walking);
+// function walking() {
+//     console.log('clicked');
+// }
 
 
 var service;
-function findPlaceInfo(placeNames) {
-    console.log(placeNames);
+function findPlaceInfo(placeName){
+    console.log(placeName);
     var request = {
-        query: placeNames + " Wellington New Zealand",
-        field: ['id', 'name','photos','formatted_address', 'rating', 'opening_hours' ]
+        query: placeName +' Wellington New Zealand',
+        fields: ['id', 'name', 'photos', 'formatted_address', 'rating', 'opening_hours']
     };
     service = new google.maps.places.PlacesService(map);
-    service.findPlaceFromQuery(request, getPlace);
+    service.findPlaceFromQuery(request, getPlaces);
 }
 
 
-function getPlace(results, status) {
+function getPlaces(results, status) {
     console.log(status);
     console.log(results);
     if (status == "OK") {
         console.log(results);
         for (var i = 0; i < results.length; i++) {
           console.log(results[i]);
-          var photos = results[i].photo
-          console.log(photo[0].getUrl({
+          var photos = results[i].photos
+          console.log(photos[0].getUrl({
               'maxWidth': 300,
               'maxHeight': 300
           })); // get the url of photos
