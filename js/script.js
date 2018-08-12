@@ -58,50 +58,48 @@ function getLocation() {
 
 console.log(storeArray);
 $(document).on('click', '.place', function(){
-  var id = $(this).data('id');
-  for (var i = 0; i < storeArray.length; i++) {
-      if (storeArray[i].markerID === id) {
-        console.log(storeArray[i]);
-        // map.panTo(storeArray[i].position);
-        // map.setZoom(17);
-        // console.log(id);
-        // break;
-        var request = {
-          origin: railwayStation,
-          destination: storeArray[i].position,
-          travelMode : "DRIVING"
+    var id = $(this).data('id');
+    for (var i = 0; i < storeArray.length; i++) {
+        if (storeArray[i].markerID === id) {
+            console.log(storeArray[i]);
+            // map.panTo(storeArray[i].position);
+            // map.setZoom(17);
+            // console.log(id);
+            // break;
+            var request = {
+                origin: railwayStation,
+                destination: storeArray[i].position,
+                travelMode : "DRIVING"
+            }
+            findPlaceInfo(storeArray[i].title);
+            showInfoBox(storeArray[i]);
         }
-        findPlaceInfo(storeArray[i].title);
-        showInfoBox(storeArray[i]);
-      }
-  }
-  directionService.route(request, function(result, status) {
-    if (status == 'OK') {
-      directionsDisplay.setDirections(result);
     }
-  });
-  showDiv ();
+    directionService.route(request, function(result, status) {
+      if (status == 'OK') {
+        directionsDisplay.setDirections(result);
+      }
+    });
+    showDiv ();
 });
 
 function markerClickEvent(getMarkers) {
-    // if(infoBox){
-    //     infoBox.close(); // if infobox is open close
-    // }
-  //initialzing info window
+  // initialzing info window
     infobox = new google.maps.InfoWindow();
+    map.panTo(getMarkers.position);
     google.maps.event.addListener(getMarkers, 'click', function () {
-        // infobox.setContent('<div><strong>'+marker.title+'</strong></div>');
+
         // infobox.open(map, getMarkers); //wnat to appear on the map and by marker
         showInfoBox(getMarkers);
     })
 }
 
-function showInfoBox(marker) {
+function showInfoBox(getMarkers) {
     if(infobox){
       infobox.close();
   }
   infobox = new google.maps.InfoWindow();
-  infobox.setContent('<div><strong>'+marker.title+'</strong></div>');
+    infobox.setContent('<div class = "infobox"><strong>'+getMarkers.title+'</strong><br></div>');
   infobox.open(map, getMarkers);
 }
 
@@ -132,18 +130,18 @@ function findPlaceInfo(placeName) {
 function getPlace(results, status) {
     // console.log(status);
     // console.log(results);
-    if (status == "OK") {
-        console.log(results);
+    console.log(status);
+    if(status == "OK"){
         for (var i = 0; i < results.length; i++) {
-          console.log(results[i]);
-          var photos = results[i].photos
-          console.log(photos[0].getUrl({
-              'maxWidth': 300,
-              'maxHeight': 300
-          })); // get the url of photos
+            console.log(results[i]);
+            var photos = results[i].photos;
+            console.log(photos[0].getUrl({
+                'maxWidth': 300,
+                'maxHeight': 300
+            }));
         }
     } else {
-        console.log("WRONG");
+        console.log("Something wrong with getting the places");
     }
 }
 // function
